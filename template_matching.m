@@ -1,20 +1,23 @@
-function template_matching (CroppedImageFile, TargetImageFile)
-    % Read cropped image
-    CroppedImage = imread(CroppedImageFile);
-    %convert cropped image to grayscale
-    CroppedImage = rgb2gray(CroppedImage);
-    % CI = cropped image
-    [RowCI, ColCI] = size(CroppedImage);
-    sprintf('The size of the cropped image is %d%d.',RowCI, ColCI)
+function template_matching (TemplateImageFile, TargetImageFile)
+    % Read Template image
+    TemplateImage = imread(TemplateImageFile);
     % Read target image
     TargetImage = imread(TargetImageFile);
+    %Sharpen both images
+    %TemplateImage = imsharpen(TemplateImage);
+    %TargetImage = imsharpen(TargetImage);
+    %convert Template image to grayscale
+    TemplateImage = rgb2gray(TemplateImage);
+    % CI = Template image
+    [RowCI, ColCI] = size(TemplateImage);
+    sprintf('The size of the Template image is %d%d.',RowCI, ColCI)
     %convert target image to grayscale
     TargetImage = rgb2gray(TargetImage);
     % TI = target image
     [RowTI, ColTI] = size(TargetImage);
     sprintf('The size of the target image is %d%d.',RowTI, ColTI)
     % Calculate Normalized Cross Correlation Matrix
-    cc = normxcorr2(CroppedImage, TargetImage);
+    cc = normxcorr2(TemplateImage, TargetImage);
     % Display the Normalized Cross Correlation Matrix
     %imshow(cc), title('Normalized Cross Correlation Matrix')
     % CC = Cross Correlation
